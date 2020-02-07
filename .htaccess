@@ -1,8 +1,8 @@
 
 # BEGIN WordPress
-# Строки между `BEGIN WordPress` и `END WordPress` были созданы автоматически.
-# Они могут быть изменены только фильтрами WordPress.
-# Все изменения между этими отметками будут перезаписаны.
+# The directives (lines) between `BEGIN WordPress` and `END WordPress` are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /lacosina/
