@@ -32,7 +32,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-			<p>&copy; <?php echo esc_html(date('Y')).' '; bloginfo( 'name' ); ?> | <?php printf( esc_html__( 'Theme by %1$s', 'businessup' ),  '<a href="'.esc_url('https://www.themeansar.com').'" rel="designer">Theme Ansar</a>' ); ?></p>
+			<p>&copy; <?php echo esc_html(date('Y')).' '; bloginfo( 'name' ); ?> </p>
 		</div>
         <div class="col-md-6 col-sm-6 text-right text-center-xs">
           <?php if ( has_nav_menu( 'social' ) ) : ?>
