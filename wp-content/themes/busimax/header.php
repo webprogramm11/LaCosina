@@ -29,8 +29,8 @@
         <div class="col-md-6 col-xs-12 col-sm-6">
          <ul class="info-left">
             <?php 
-              $businessup_head_info_one = get_theme_mod('businessup_head_info_one','<li><a><i class="fa fa-clock-o "></i>Open-Hours:10 am to 7pm</a></li>');
-              $businessup_head_info_two = get_theme_mod('businessup_head_info_two','<li><a href="mailto:info@themeansar.com" title="Mail Me"><i class="fa fa-envelope"></i> info@themeansar.com</a></li>');
+              $businessup_head_info_one = get_theme_mod('businessup_head_info_one','<li><a><i class="fa fa-clock-o "></i>Աշխատանքային ժամերը 09:00-18:00</a></li>');
+              $businessup_head_info_two = get_theme_mod('businessup_head_info_two','<li><a href="mailto:info@themeansar."><i class="fa fa-envelope"></i> lacosina@gmail.com</a></li>');
             ?>
             <li><?php echo wp_kses_post($businessup_head_info_one); ?></li>
             <li><?php echo wp_kses_post($businessup_head_info_two); ?></li>
