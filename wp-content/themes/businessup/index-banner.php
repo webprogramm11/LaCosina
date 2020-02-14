@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-md-12 col-sm-12">
 			<div class="businessup-breadcrumb-title">
-              <h1><?php the_title(); ?></h1>
+              <h1>Լա Կոսինա Արմենիա</h1>
             </div>
           </div>
         </div>
