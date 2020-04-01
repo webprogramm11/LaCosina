@@ -33,7 +33,38 @@ class HFE_Admin {
 			self::$_instance = new self();
 		}
 
+		add_action( 'elementor/init', __CLASS__ . '::load_admin', 0 );
+
 		return self::$_instance;
+	}
+
+	/**
+	 * Load the icons style in editor.
+	 *
+	 * @since 1.3.0
+	 */
+	public static function load_admin() {
+		add_action( 'elementor/editor/after_enqueue_styles', __CLASS__ . '::hfe_admin_enqueue_scripts' );
+	}
+
+	/**
+	 * Enqueue admin scripts
+	 *
+	 * @since 1.3.0
+	 * @param string $hook Current page hook.
+	 * @access public
+	 */
+	public static function hfe_admin_enqueue_scripts( $hook ) {
+
+		// Register the icons styles.
+		wp_register_style(
+			'hfe-style',
+			HFE_URL . 'assets/css/style.css',
+			[],
+			HFE_VER
+		);
+
+		wp_enqueue_style( 'hfe-style' );
 	}
 
 	/**
@@ -49,11 +80,48 @@ class HFE_Admin {
 		add_filter( 'single_template', [ $this, 'load_canvas_template' ] );
 		add_filter( 'manage_elementor-hf_posts_columns', [ $this, 'set_shortcode_columns' ] );
 		add_action( 'manage_elementor-hf_posts_custom_column', [ $this, 'render_shortcode_column' ], 10, 2 );
+		if ( defined( 'ELEMENTOR_PRO_VERSION' ) && ELEMENTOR_PRO_VERSION > 2.8 ) {
+			add_action( 'elementor/editor/footer', [ $this, 'register_hfe_epro_script' ], 99 );
+		}
 
 		if ( is_admin() ) {
 			add_action( 'manage_elementor-hf_posts_custom_column', [ $this, 'column_content' ], 10, 2 );
 			add_filter( 'manage_elementor-hf_posts_columns', [ $this, 'column_headings' ] );
 		}
+	}
+
+	/**
+	 * Script for Elementor Pro full site editing support.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return void
+	 */
+	public function register_hfe_epro_script() {
+		$ids_array = [
+			[
+				'id'    => get_hfe_header_id(),
+				'value' => 'Header',
+			],
+			[
+				'id'    => get_hfe_footer_id(),
+				'value' => 'Footer',
+			],
+			[
+				'id'    => hfe_get_before_footer_id(),
+				'value' => 'Before Footer',
+			],
+		];
+
+		wp_enqueue_script( 'hfe-elementor-pro-compatibility', HFE_URL . 'inc/js/hfe-elementor-pro-compatibility.js', [ 'jquery' ], HFE_VER, true );
+
+		wp_localize_script(
+			'hfe-elementor-pro-compatibility',
+			'hfe_admin',
+			[
+				'ids_array' => wp_json_encode( $ids_array ),
+			]
+		);
 	}
 
 	/**
